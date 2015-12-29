@@ -51,11 +51,26 @@ class WakaTime {
         return $this->guzzle->get("{$this->url}/users/current?api_key={$this->getApiKey()}")->json();
     }
 
+    /**
+     * Get all projects from the current user
+     *
+     * @return mixed
+     * @throws \Exception
+     */
     public function projects()
     {
         return $this->guzzle->get("{$this->url}/users/current/projects?api_key={$this->getApiKey()}")->json();
     }
 
+    /**
+     * Get all commits from the current user for a given project. Possibly filtered by commit author
+     *
+     * @param      $project
+     * @param null $author
+     *
+     * @return mixed
+     * @throws \Exception
+     */
     public function commits($project, $author = null)
     {
         if ($author !== null) $author = "&author{$author}";
