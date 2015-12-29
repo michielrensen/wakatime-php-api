@@ -51,6 +51,18 @@ class WakaTime {
         return $this->guzzle->get("{$this->url}/users/current?api_key={$this->getApiKey()}")->json();
     }
 
+    public function projects()
+    {
+        return $this->guzzle->get("{$this->url}/users/current/projects?api_key={$this->getApiKey()}")->json();
+    }
+
+    public function commits($project, $author = null)
+    {
+        if ($author !== null) $author = "&author{$author}";
+
+        return $this->guzzle->get("{$this->url}/users/current/projects/{$project}/commits?api_key={$this->getApiKey()}" . $author)->json();
+    }
+
     /**
      * See: https://wakatime.com/api#summary-daily for details.
      *
