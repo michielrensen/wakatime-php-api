@@ -82,11 +82,13 @@ class WakaTime {
      * @return mixed
      * @throws \Exception
      */
-    public function commits($project, $author = null)
+    public function commits($project, $author = null, $page = null)
     {
-        if ($author !== null) $author = "&author{$author}";
+        if ($author !== null) $author = "&author={$author}";
 
-        return $this->guzzle->get("{$this->url}/users/current/projects/{$project}/commits?api_key={$this->getApiKey()}" . $author)->json();
+        if ($page !== null) $page = "&page={$page}";
+
+        return $this->guzzle->get("{$this->url}/users/current/projects/{$project}/commits?api_key={$this->getApiKey()}" . $author .  $page)->json();
     }
 
     /**
