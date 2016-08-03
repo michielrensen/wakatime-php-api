@@ -147,7 +147,7 @@ class WakaTime {
     public function getHoursLoggedForLast($period, $project = null)
     {
         $todayDate = date('m/d/Y');
-        $endDate = date_format(date_sub(date_create($todayDate), date_interval_create_from_date_string($period)), 'm/d/Y');
+        $endDate = date('m/d/Y',strtotime("- $period"));
 
         return $this->getHoursLoggedFor($todayDate, $endDate, $project);
     }
@@ -226,8 +226,8 @@ class WakaTime {
      */
     public function getHoursLoggedForLastMonth($project = null)
     {
-        $endDate = date_format(date_sub(date_create(), date_interval_create_from_date_string('1 month')), 'm/01/Y');
-        $startDate = date_format(date_sub(date_create(), date_interval_create_from_date_string('1 month')), 'm/t/Y');
+        $endDate = date('m/01/Y',strtotime('- 1 month'));
+        $startDate = date('m/t/Y',strtotime('- 1 month'));
 
         return $this->getHoursLoggedFor($startDate, $endDate, $project);
     }
